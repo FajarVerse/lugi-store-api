@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Support\Facades\Auth;
+
+class AuthenticatedSessionController extends Controller
+{
+    public function store(LoginRequest $request)
+    {
+        $request->authenticate();
+
+        $request->session()->regenerate();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Login berhasil',
+            'data' => [
+                'user' => [
+                    'id' => Auth::user()->id,
+                    'username' => Auth::user()->username,
+                    'name' => Auth::user()->name,
+                    'email' => Auth::user()->email,
+                ]
+            ]
+        ], 200);
+    }
+}

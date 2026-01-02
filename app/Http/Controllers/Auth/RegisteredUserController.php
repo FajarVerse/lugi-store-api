@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Validation\Rules\Password;
 
 class RegisteredUserController extends Controller
@@ -64,6 +65,7 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         return response()->json([
+            'status' => 201,
             'message' => 'Registrasi Berhasil',
             'data' => [
                 'id' => $user->id,

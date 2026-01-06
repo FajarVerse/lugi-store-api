@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
@@ -12,19 +13,33 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
-        $request->session()->regenerate();
+        $user = Auth::user();
+
+        $token = $user->createToken('api-token')->plainTextToken;
 
         return response()->json([
-            'status' => 200,
-            'message' => 'Login berhasil',
+            'message' => 'Login success',
+            'user_token' => $token,
+            'token_type' => 'Bearer',
             'data' => [
                 'user' => [
-                    'id' => Auth::user()->id,
-                    'username' => Auth::user()->username,
-                    'name' => Auth::user()->name,
-                    'email' => Auth::user()->email,
-                ]
-            ]
+                    'username' => $user->username,
+                    'email' => $user->email,
+                    'name' => $user->name,
+                ],
+            ],
         ], 200);
+    }
+
+    public function destroy(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json(
+            [
+                'message' => 'logout success',
+            ],
+            200
+        );
     }
 }

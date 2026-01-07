@@ -12,9 +12,9 @@ it('can change password user successfully', function () {
     Sanctum::actingAs($user);
 
     $response = $this->patchJson('/api/auth/change_password', [
-        'current_password' => 'Rahasia123!',
+        'old_password' => 'Rahasia123!',
         'password' => 'Rahasia1234!',
-        'password_confirmation' => 'Rahasia1234!' 
+        'password_confirmation' => 'Rahasia1234!'
     ]);
 
     dump($response->json());

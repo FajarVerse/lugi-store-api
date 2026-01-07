@@ -23,7 +23,7 @@ class ChangePasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'current_password' => ['string', 'current_password'],
+            'old_password' => ['required', 'string', 'current_password'],
             'password' => ['required', 'confirmed', Password::min(8)->mixedCase()->numbers()->symbols()]
         ];
     }
@@ -32,6 +32,10 @@ class ChangePasswordRequest extends FormRequest
     public function messages(): array
     {
         return [
+            // current password
+            'old_password.required' => 'Password lama wajib di isi',
+            'old_password.current_password' => 'Password lama tidak sesuai',
+
             'password.required' => 'Password wajib diisi.',
             'password.confirmed' => 'Konfirmasi password tidak cocok.',
             'password.min' => 'Password minimal 8 karakter.',

@@ -14,8 +14,6 @@ it('can add new category successfuly', function () {
         ]
     ]);
 
-    dump($response->json());
-
     $response->assertStatus(200);
 });
 
@@ -29,8 +27,6 @@ it('cant add new category if data invalid', function () {
             ['name' => '']
         ]
     ]);
-
-    dump($response->json());
 
     $response->assertStatus(422);
 });

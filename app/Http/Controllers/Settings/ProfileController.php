@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Settings;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\ProfileUpdateRequest;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProfileController extends Controller
 {
@@ -32,6 +33,32 @@ class ProfileController extends Controller
                 'latitude' => $user->latitude,
                 'longitude' => $user->longitude
             ]
+        ], 200);
+    }
+
+    public function destroy(Request $request)
+    {
+        $request->validate([
+            'password' => ['required', 'current_password']
+        ]);
+
+        $user = $request->user();
+
+        $user->tokens()->delete();
+
+        // relasi order & carts
+
+        // foreach ($user->orders as $order) {
+        //     $order->orderItem()->delete();
+        //     $order->delete();
+        // }
+
+        // $user->carts()->delete();
+
+        $user->delete();
+
+        return response()->json([
+            'message' => 'Account deleted successfully'
         ], 200);
     }
 }

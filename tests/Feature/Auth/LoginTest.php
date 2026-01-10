@@ -19,7 +19,5 @@ it('can login user successfully', function () {
         'password' => 'Password123!'
     ]);
 
-    dump($response->json());
-
     $response->assertStatus(200);
 });

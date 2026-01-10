@@ -11,7 +11,7 @@ it('can update profile users successfully', function () {
 
     Sanctum::actingAs($user);
 
-    $response = $this->putJson('/api/settings/profile-update', [
+    $response = $this->patchJson('/api/settings/profile-update', [
         'name' => 'Nazwa Alfa',
         'email' => 'nazwa@gmail.com',
         'phone' => '0293239231',
@@ -19,8 +19,6 @@ it('can update profile users successfully', function () {
         'latitude' => -6.200000,
         'longitude' => 106.816666,
     ]);
-
-    dump($response->json());
 
     $response->assertStatus(200);
 });
@@ -30,7 +28,7 @@ it('cant update profile users if data invalid', function () {
 
     Sanctum::actingAs($user);
 
-    $response = $this->putJson('/api/settings/profile-update', [
+    $response = $this->patchJson('/api/settings/profile-update', [
         'name' => '',
         'email' => '',
         'phone' => '',
@@ -38,8 +36,6 @@ it('cant update profile users if data invalid', function () {
         'latitude' => 0,
         'longitude' => 0
     ]);
-
-    dump($response->json());
-
+    
     $response->assertStatus(422);
 });

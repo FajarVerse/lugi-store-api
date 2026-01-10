@@ -15,6 +15,5 @@ it('can logout user successfully', function () {
 
     $response = $this->deleteJson('/api/auth/logout');
 
-    dump($response->json());
     $response->assertStatus(200);
 });

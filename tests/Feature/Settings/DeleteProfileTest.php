@@ -6,15 +6,13 @@ use Laravel\Sanctum\Sanctum;
 
 uses(RefreshDatabase::class);
 
-it('can change password user successfully', function () {
+it('can delete profile user successfully', function () {
     $user = User::factory()->create();
 
     Sanctum::actingAs($user);
 
-    $response = $this->patchJson('/api/auth/change_password', [
-        'old_password' => 'Rahasia123!',
-        'password' => 'Rahasia1234!',
-        'password_confirmation' => 'Rahasia1234!'
+    $response = $this->deleteJson('/api/settings/profile-delete', [
+        'password' => 'Rahasia123!'
     ]);
 
     $response->assertStatus(200);

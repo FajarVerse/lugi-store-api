@@ -5,4 +5,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->controller(ProductController::class)->group(function () {
   Route::post('/products', [ProductController::class, 'store']);
+  Route::patch('/products/{product}', [ProductController::class, 'update']);
 });

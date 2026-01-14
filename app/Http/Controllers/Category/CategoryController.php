@@ -11,9 +11,26 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
+    public function index()
+    {
+        $categories = Category::latest()->get();
+
+        return response()->json([
+            'message' => 'ok',
+            'data' => $categories
+        ], 200);
+    }
+
+    public function show(Category $category)
+    {
+        return response()->json([
+            'message' => 'ok',
+            'data' => $category
+        ], 200);
+    }
+
     public function store(AddCategoryRequest $request)
     {
-
         $categories = collect($request->validated()['categories'])
             ->map(fn($category) => [
                 'name' => Str::lower($category['name']),

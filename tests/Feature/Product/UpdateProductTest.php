@@ -37,7 +37,5 @@ it('can update product successfully', function () {
         ],
     ]);
 
-    dump($response->json());
-
     $response->assertStatus(200);
 });

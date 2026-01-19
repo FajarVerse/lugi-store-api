@@ -10,9 +10,34 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpKernel\HttpCache\Store;
 
 class ProductController extends Controller
 {
+    public function index()
+    {
+        $product = Product::latest()->get();
+
+        return response()->json([
+            'message' => 'ok',
+            'data' => $product
+        ], 200);
+    }
+
+    public function show(Product $product)
+    {
+        $product->load([
+            'variants',
+            'category',
+            'attributes'
+        ]);
+
+        return response()->json([
+            'message' => 'ok',
+            'data' => $product
+        ], 200);
+    }
+
     public function store(AddProductRequest $request)
     {
         $product = DB::transaction(function () use ($request) {
@@ -110,7 +135,18 @@ class ProductController extends Controller
         ], 200);
     }
 
-    public function destroy(Product $category) {
-        
+    public function destroy(Product $product)
+    {
+        DB::transaction(function () use ($product) {
+            if ($product->image && Storage::disk('public')->exists($product->image)) {
+                Storage::disk('public')->delete($product->image);
+            }
+
+            $product->delete();
+        });
+
+        return response()->json([
+            'message' => 'Product deleted successfully'
+        ], 200);
     }
 }

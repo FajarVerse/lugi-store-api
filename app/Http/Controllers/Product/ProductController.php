@@ -109,4 +109,8 @@ class ProductController extends Controller
             'data' => $product
         ], 200);
     }
+
+    public function destroy(Product $category) {
+        
+    }
 }

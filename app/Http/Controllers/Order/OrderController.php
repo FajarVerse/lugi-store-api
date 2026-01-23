@@ -25,7 +25,7 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $order->load([
-            'order_items.variant.product'
+            'orderItems.variant.product'
         ]);
 
         return response([

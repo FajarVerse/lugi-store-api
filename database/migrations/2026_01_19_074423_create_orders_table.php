@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->id();
             $table->foreignId('user_id')->constrained(
                 table: 'users',
                 indexName: 'orders_user_id'
@@ -24,7 +23,7 @@ return new class extends Migration
             $table->text('shipping_address')->nullable();
             $table->string('payment_method')->nullable();
             $table->string('payment_reference')->nullable();
-            $table->timestamp('paid_at');
+            $table->timestamp('paid_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->index(['user_id', 'status']);

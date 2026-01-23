@@ -1,0 +1,10 @@
+<?php
+
+use App\Http\Controllers\Order\OrderController;
+use Illuminate\Support\Facades\Route;
+
+Route::middleware('auth:sanctum')->controller(OrderController::class)->group(function () {
+  Route::get('/orders', [OrderController::class, 'index']);
+  Route::get('/orders/{order}', [OrderController::class, 'show']);
+  Route::post('/orders', [OrderController::class, 'store']);
+});

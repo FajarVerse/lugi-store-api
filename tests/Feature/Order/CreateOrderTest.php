@@ -55,6 +55,4 @@ it('can create order successfully', function () {
         'id' => $variant->id,
         'stock' => 8
     ]);
-
-    dump($response->json());
 });

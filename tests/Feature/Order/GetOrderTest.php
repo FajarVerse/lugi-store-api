@@ -16,7 +16,5 @@ it('can get orders successfully', function () {
 
     $response = $this->getJson('/api/orders');
 
-    dump($response->json());
-
     $response->assertStatus(200);
 });

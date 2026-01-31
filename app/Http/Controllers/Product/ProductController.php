@@ -103,25 +103,45 @@ class ProductController extends Controller
 
             if ($request->filled('variants')) {
                 foreach ($request->variants as $variant) {
+                    $data = [];
+
+                    foreach (['size', 'stock', 'price', 'weight'] as $field) {
+                        if (array_key_exists($field, $variant)) {
+                            $data[$field] = $field === 'size' ? Str::lower($variant[$field]) : $variant[$field];
+                        }
+                    }
+
                     $product->variants()->updateOrCreate(
-                        ['id' => $variant['id'] ?? null],
-                        [
-                            'size' => isset($variant['size'])
-                                ? Str::lower($variant['size'])
-                                : null,
-                            'stock' => $variant['stock'],
-                            'price' => $variant['price'],
-                            'weight' => $variant['weight'],
-                        ]
+                        ['id' => $variant['id']],
+                        $data
                     );
+                    // $product->variants()->updateOrCreate(
+                    //     ['id' => $variant['id'] ?? null],
+                    //     [
+                    //         'size' => isset($variant['size'])
+                    //             ? Str::lower($variant['size'])
+                    //             : null,
+                    //         'stock' => $variant['stock'],
+                    //         'price' => $variant['price'],
+                    //         'weight' => $variant['weight'],
+                    //     ]
+                    // );
                 }
             }
 
             if ($request->filled('product_attributes')) {
                 foreach ($request->product_attributes as $attr) {
+                    $data = [];
+
+                    foreach (['name', 'value'] as $field) {
+                        if (array_key_exists($field, $attr)) {
+                            $data[$field] = $variant[$field];
+                        }
+                    }
+
                     $product->attributes()->updateOrCreate(
                         ['id' => $attr['id'] ?? null],
-                        $attr
+                        $data
                     );
                 }
             }

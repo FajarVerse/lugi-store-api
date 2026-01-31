@@ -3,7 +3,7 @@
 use App\Http\Controllers\Category\CategoryController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->controller(CategoryController::class)->group(function () {
+Route::middleware('auth:sanctum', 'verified')->controller(CategoryController::class)->group(function () {
   Route::get('/categories', [CategoryController::class, 'index']);
   Route::get('/categories/{category:slug}', [CategoryController::class, 'show']);
   Route::post('/categories', [CategoryController::class, 'store']);

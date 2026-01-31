@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,10 +18,29 @@ class AuthenticatedSessionController extends Controller
 
         $token = $user->createToken('api-token')->plainTextToken;
 
+        if (!$user->hasVerifiedEmail()) {
+            return response()->json([
+                'message' => 'Login success',
+                'user_token' => $token,
+                'token_type' => 'Bearer',
+                'email_verified' => false,
+                'can_resend_verification' => true,
+                'data' => [
+                    'user' => [
+                        'username' => $user->username,
+                        'email' => $user->email,
+                        'name' => $user->name,
+                    ],
+                ],
+            ], 200);
+        }
+
+
         return response()->json([
             'message' => 'Login success',
             'user_token' => $token,
             'token_type' => 'Bearer',
+            'email_verified' => true,
             'data' => [
                 'user' => [
                     'username' => $user->username,

@@ -39,4 +39,36 @@ class UpdateProductRequest extends FormRequest
             'attributes.*.value' => ['sometimes', 'string', 'min:1'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.string' => 'Nama produk harus berupa teks.',
+            'name.min' => 'Nama produk minimal :min karakter.',
+            'name.max' => 'Nama produk maksimal :max karakter.',
+            'description.string' => 'Deskripsi produk harus berupa teks.',
+            'description.min' => 'Deskripsi produk minimal :min karakter.',
+            'description.max' => 'Deskripsi produk maksimal :max karakter.',
+            'category_id.exists' => 'Kategori yang dipilih tidak valid.',
+
+            'variants.array' => 'Format variants harus berupa array.',
+            'variants.min' => 'Minimal harus ada :min variant.',
+            'variants.*.id.exists' => 'Variant yang dipilih tidak valid.',
+            'variants.*.size.string' => 'Ukuran variant harus berupa teks.',
+            'variants.*.size.min' => 'Ukuran variant minimal :min karakter.',
+            'variants.*.stock.integer' => 'Stok variant harus berupa angka bulat.',
+            'variants.*.stock.min' => 'Stok variant minimal :min.',
+            'variants.*.price.integer' => 'Harga variant harus berupa angka bulat.',
+            'variants.*.price.min' => 'Harga variant minimal :min.',
+            'variants.*.weight.integer' => 'Berat variant harus berupa angka bulat.',
+            'variants.*.weight.min' => 'Berat variant minimal :min gram.',
+
+            'attributes.array' => 'Format atribut harus berupa array.',
+            'attributes.*.id.exists' => 'Atribut yang dipilih tidak valid.',
+            'attributes.*.name.string' => 'Nama atribut harus berupa teks.',
+            'attributes.*.name.min' => 'Nama atribut minimal :min karakter.',
+            'attributes.*.value.string' => 'Nilai atribut harus berupa teks.',
+            'attributes.*.value.min' => 'Nilai atribut minimal :min karakter.',
+        ];
+    }
 }

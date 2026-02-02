@@ -33,15 +33,15 @@ class ChangePasswordRequest extends FormRequest
     {
         return [
             // current password
-            'old_password.required' => 'Password lama wajib di isi',
-            'old_password.current_password' => 'Password lama tidak sesuai',
+            'old_password.required' => 'Old password must be filled in',
+            'old_password.current_password' => 'The old password is incorrect',
 
-            'password.required' => 'Password wajib diisi.',
-            'password.confirmed' => 'Konfirmasi password tidak cocok.',
-            'password.min' => 'Password minimal 8 karakter.',
-            'password.mixedCase' => 'Password harus mengandung huruf besar dan kecil.',
-            'password.numbers' => 'Password harus mengandung angka.',
-            'password.symbols' => 'Password harus mengandung simbol.',
+            'password.required' => 'Password is required',
+            'password.confirmed' => 'Password confirmation is incorrect',
+            'password.min' => 'Password must be at least 8 characters',
+            'password.mixedCase' => 'Password must contain both upper and lower case letters',
+            'password.numbers' => 'Password must contain numbers',
+            'password.symbols' => 'Password must contain symbols',
         ];
     }
 }

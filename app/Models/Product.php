@@ -31,7 +31,7 @@ class Product extends Model
         return $this->hasMany(Variant::class, 'product_id');
     }
 
-    public function attributes(): HasMany {
+    public function productAttributes(): HasMany {
         return $this->hasMany(Attribute::class, 'product_id');
     }
 }

@@ -33,42 +33,52 @@ class UpdateProductRequest extends FormRequest
             'variants.*.price' => ['sometimes', 'integer', 'min:5'],
             'variants.*.weight' => ['sometimes', 'integer', 'min:1000'],
 
-            'attributes' => ['sometimes', 'array'],
-            'attributes.*.id' => ['sometimes', 'exists:attributes,id'],
-            'attributes.*.name' => ['sometimes', 'string', 'min:1'],
-            'attributes.*.value' => ['sometimes', 'string', 'min:1'],
+            'product_attributes' => ['sometimes', 'array'],
+            'product_attributes.*.id' => ['sometimes', 'exists:attributes,id'],
+            'product_attributes.*.name' => ['sometimes', 'string', 'min:1'],
+            'product_attributes.*.value' => ['sometimes', 'string', 'min:1'],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'name.string' => 'Nama produk harus berupa teks.',
-            'name.min' => 'Nama produk minimal :min karakter.',
-            'name.max' => 'Nama produk maksimal :max karakter.',
-            'description.string' => 'Deskripsi produk harus berupa teks.',
-            'description.min' => 'Deskripsi produk minimal :min karakter.',
-            'description.max' => 'Deskripsi produk maksimal :max karakter.',
-            'category_id.exists' => 'Kategori yang dipilih tidak valid.',
+            'name.string' => 'Product name must be a string.',
+            'name.min' => 'Product name must be at least :min characters.',
+            'name.max' => 'Product name may not be greater than :max characters.',
 
-            'variants.array' => 'Format variants harus berupa array.',
-            'variants.min' => 'Minimal harus ada :min variant.',
-            'variants.*.id.exists' => 'Variant yang dipilih tidak valid.',
-            'variants.*.size.string' => 'Ukuran variant harus berupa teks.',
-            'variants.*.size.min' => 'Ukuran variant minimal :min karakter.',
-            'variants.*.stock.integer' => 'Stok variant harus berupa angka bulat.',
-            'variants.*.stock.min' => 'Stok variant minimal :min.',
-            'variants.*.price.integer' => 'Harga variant harus berupa angka bulat.',
-            'variants.*.price.min' => 'Harga variant minimal :min.',
-            'variants.*.weight.integer' => 'Berat variant harus berupa angka bulat.',
-            'variants.*.weight.min' => 'Berat variant minimal :min gram.',
+            'description.string' => 'Product description must be a string.',
+            'description.min' => 'Product description must be at least :min characters.',
+            'description.max' => 'Product description may not be greater than :max characters.',
 
-            'attributes.array' => 'Format atribut harus berupa array.',
-            'attributes.*.id.exists' => 'Atribut yang dipilih tidak valid.',
-            'attributes.*.name.string' => 'Nama atribut harus berupa teks.',
-            'attributes.*.name.min' => 'Nama atribut minimal :min karakter.',
-            'attributes.*.value.string' => 'Nilai atribut harus berupa teks.',
-            'attributes.*.value.min' => 'Nilai atribut minimal :min karakter.',
+            'category_id.exists' => 'The selected category is invalid.',
+
+            'variants.array' => 'Variants must be an array.',
+            'variants.min' => 'There must be at least :min variant.',
+
+            'variants.*.id.exists' => 'The selected variant is invalid.',
+
+            'variants.*.size.string' => 'Variant size must be a string.',
+            'variants.*.size.min' => 'Variant size must be at least :min characters.',
+
+            'variants.*.stock.integer' => 'Variant stock must be an integer.',
+            'variants.*.stock.min' => 'Variant stock must be at least :min.',
+
+            'variants.*.price.integer' => 'Variant price must be an integer.',
+            'variants.*.price.min' => 'Variant price must be at least :min.',
+
+            'variants.*.weight.integer' => 'Variant weight must be an integer.',
+            'variants.*.weight.min' => 'Variant weight must be at least :min grams.',
+
+            'product_attributes.array' => 'Product attributes must be an array.',
+
+            'product_attributes.*.id.exists' => 'The selected product attribute is invalid.',
+
+            'product_attributes.*.name.string' => 'Attribute name must be a string.',
+            'product_attributes.*.name.min' => 'Attribute name must be at least :min characters.',
+
+            'product_attributes.*.value.string' => 'Attribute value must be a string.',
+            'product_attributes.*.value.min' => 'Attribute value must be at least :min characters.',
         ];
     }
 }

@@ -29,7 +29,7 @@ class ProductController extends Controller
         $product->load([
             'variants',
             'category',
-            'attributes'
+            'productAttributes'
         ]);
 
         return response()->json([
@@ -63,11 +63,11 @@ class ProductController extends Controller
 
             if ($request->product_attributes) {
                 foreach ($request->product_attributes as $attr) {
-                    $product->attributes()->create($attr);
+                    $product->productAttributes()->create($attr);
                 }
             }
 
-            return $product->load(['variants', 'attributes']);
+            return $product->load(['variants', 'productAttributes']);
         });
 
         return response()->json([
@@ -115,17 +115,6 @@ class ProductController extends Controller
                         ['id' => $variant['id']],
                         $data
                     );
-                    // $product->variants()->updateOrCreate(
-                    //     ['id' => $variant['id'] ?? null],
-                    //     [
-                    //         'size' => isset($variant['size'])
-                    //             ? Str::lower($variant['size'])
-                    //             : null,
-                    //         'stock' => $variant['stock'],
-                    //         'price' => $variant['price'],
-                    //         'weight' => $variant['weight'],
-                    //     ]
-                    // );
                 }
             }
 
@@ -135,18 +124,21 @@ class ProductController extends Controller
 
                     foreach (['name', 'value'] as $field) {
                         if (array_key_exists($field, $attr)) {
-                            $data[$field] = $variant[$field];
+                            $data[$field] = $attr[$field];
                         }
                     }
 
-                    $product->attributes()->updateOrCreate(
-                        ['id' => $attr['id'] ?? null],
+                    $product->productAttributes()->updateOrCreate(
+                        [
+                            'id' => $attr['id'] ?? null,
+                            'product_id' => $product->id
+                        ],
                         $data
                     );
                 }
             }
 
-            return $product->load(['variants', 'attributes']);
+            return $product->load(['variants', 'productAttributes']);
         });
 
         return response()->json([

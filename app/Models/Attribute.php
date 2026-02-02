@@ -12,7 +12,8 @@ class Attribute extends Model
 
     protected $fillable = [
         'name',
-        'value'
+        'value',
+        'product_id'
     ];
 
     // protected $with = ['product'];

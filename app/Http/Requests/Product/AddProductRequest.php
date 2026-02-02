@@ -39,48 +39,48 @@ class AddProductRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Nama produk wajib diisi.',
-            'name.string' => 'Nama produk harus berupa teks.',
-            'name.min' => 'Nama produk minimal :min karakter.',
-            'name.max' => 'Nama produk maksimal :max karakter.',
+            'name.required' => 'Product name is required.',
+            'name.string' => 'Product name must be a string.',
+            'name.min' => 'Product name must be at least :min characters.',
+            'name.max' => 'Product name may not be greater than :max characters.',
 
-            'description.required' => 'Deskripsi produk wajib diisi.',
-            'description.string' => 'Deskripsi produk harus berupa teks.',
-            'description.min' => 'Deskripsi produk minimal :min karakter.',
-            'description.max' => 'Deskripsi produk maksimal :max karakter.',
+            'description.required' => 'Product description is required.',
+            'description.string' => 'Product description must be a string.',
+            'description.min' => 'Product description must be at least :min characters.',
+            'description.max' => 'Product description may not be greater than :max characters.',
 
-            'category_id.required' => 'Kategori produk wajib dipilih.',
-            'category_id.exists' => 'Kategori yang dipilih tidak valid.',
+            'category_id.required' => 'Product category is required.',
+            'category_id.exists' => 'The selected product category is invalid.',
 
-            'variants.required' => 'Variant produk wajib diisi.',
-            'variants.array' => 'Format variant tidak valid.',
+            'variants.required' => 'Product variants are required.',
+            'variants.array' => 'Product variants must be an array.',
 
-            'variants.*.size.required' => 'Ukuran variant wajib diisi.',
-            'variants.*.size.string' => 'Ukuran variant harus berupa teks.',
-            'variants.*.size.min' => 'Ukuran variant minimal :min karakter.',
+            'variants.*.size.required' => 'Variant size is required.',
+            'variants.*.size.string' => 'Variant size must be a string.',
+            'variants.*.size.min' => 'Variant size must be at least :min characters.',
 
-            'variants.*.stock.required' => 'Stok variant wajib diisi.',
-            'variants.*.stock.numeric' => 'Stok variant harus berupa angka.',
-            'variants.*.stock.min' => 'Stok variant minimal :min.',
+            'variants.*.stock.required' => 'Variant stock is required.',
+            'variants.*.stock.numeric' => 'Variant stock must be a number.',
+            'variants.*.stock.min' => 'Variant stock must be at least :min.',
 
-            'variants.*.price.required' => 'Harga variant wajib diisi.',
-            'variants.*.price.numeric' => 'Harga variant harus berupa angka.',
-            'variants.*.price.min' => 'Harga variant minimal :min.',
+            'variants.*.price.required' => 'Variant price is required.',
+            'variants.*.price.numeric' => 'Variant price must be a number.',
+            'variants.*.price.min' => 'Variant price must be at least :min.',
 
-            'variants.*.weight.required' => 'Berat variant wajib diisi.',
-            'variants.*.weight.numeric' => 'Berat variant harus berupa angka.',
-            'variants.*.weight.min' => 'Berat variant minimal :min gram.',
+            'variants.*.weight.required' => 'Variant weight is required.',
+            'variants.*.weight.numeric' => 'Variant weight must be a number.',
+            'variants.*.weight.min' => 'Variant weight must be at least :min grams.',
 
-            'product_attributes.required' => 'Atribut produk wajib diisi.',
-            'product_attributes.array' => 'Format atribut produk tidak valid.',
+            'product_attributes.required' => 'Product attributes are required.',
+            'product_attributes.array' => 'Product attributes must be an array.',
 
-            'product_attributes.*.name.required' => 'Nama atribut produk wajib diisi.',
-            'product_attributes.*.name.string' => 'Nama atribut produk harus berupa teks.',
-            'product_attributes.*.name.min' => 'Nama atribut produk minimal :min karakter.',
+            'product_attributes.*.name.required' => 'Attribute name is required.',
+            'product_attributes.*.name.string' => 'Attribute name must be a string.',
+            'product_attributes.*.name.min' => 'Attribute name must be at least :min characters.',
 
-            'product_attributes.*.value.required' => 'Nilai atribut produk wajib diisi.',
-            'product_attributes.*.value.string' => 'Nilai atribut produk harus berupa teks.',
-            'product_attributes.*.value.min' => 'Nilai atribut produk minimal :min karakter.',
+            'product_attributes.*.value.required' => 'Attribute value is required.',
+            'product_attributes.*.value.string' => 'Attribute value must be a string.',
+            'product_attributes.*.value.min' => 'Attribute value must be at least :min characters.',
         ];
     }
 }

@@ -14,7 +14,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::latest()->get();
+        $orders = Order::with('user')->latest()->get();
 
         return response([
             'message' => 'ok',

@@ -22,7 +22,7 @@ class Order extends Model
         'paid_at',
     ];
 
-    protected $with = ['user'];
+    // protected $with = ['user'];
 
     public function user(): BelongsTo
     {

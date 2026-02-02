@@ -6,9 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\ProfileUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+    public function index()
+    {
+        return response()->json([
+            'message' => 'ok',
+            'data' => Auth::user()
+        ]);
+    }
+
     public function update(ProfileUpdateRequest $request)
     {
         $user = $request->user();
@@ -22,7 +31,8 @@ class ProfileController extends Controller
         $user->save();
 
         return response()->json([
-            'message' => 'Update profile successfully',
+            'message' => 'Update profile successfully, Please verify your new email address.',
+            'email_verified' => false,
             'data' => [
                 'id' => $user->id,
                 'username' => $user->username,
@@ -45,15 +55,6 @@ class ProfileController extends Controller
         $user = $request->user();
 
         $user->tokens()->delete();
-
-        // relasi order & carts
-
-        // foreach ($user->orders as $order) {
-        //     $order->orderItem()->delete();
-        //     $order->delete();
-        // }
-
-        // $user->carts()->delete();
 
         $user->delete();
 

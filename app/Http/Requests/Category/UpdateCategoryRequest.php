@@ -25,4 +25,14 @@ class UpdateCategoryRequest extends FormRequest
             'name' => ['sometimes', 'string', 'min:3', 'max:50', 'regex:/^[A-Za-z ]+(-[A-Za-z ]+)*$/']
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.string' => 'Category name must be a string.',
+            'name.min' => 'Category name must be at least :min characters.',
+            'name.max' => 'Category name may not be greater than :max characters.',
+            'name.regex' => 'Category name may only contain letters, spaces, and hyphens.',
+        ];
+    }
 }

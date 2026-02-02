@@ -26,4 +26,19 @@ class AddCategoryRequest extends FormRequest
             'categories.*.name' => ['required', 'string', 'min:3', 'max:50', 'regex:/^[A-Za-z ]+(-[A-Za-z ]+)*$/']
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'categories.required' => 'Categories field is required.',
+            'categories.array' => 'Categories must be an array.',
+            'categories.min' => 'At least :min category is required.',
+
+            'categories.*.name.required' => 'Category name is required.',
+            'categories.*.name.string' => 'Category name must be a string.',
+            'categories.*.name.min' => 'Category name must be at least :min characters.',
+            'categories.*.name.max' => 'Category name may not be greater than :max characters.',
+            'categories.*.name.regex' => 'Category name may only contain letters, spaces, and hyphens.',
+        ];
+    }
 }
